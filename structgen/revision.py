@@ -274,7 +274,7 @@ class RevisionDecoder(nn.Module):
 
     def loop_specific(self, loop, loop_num):
         if loop.size(0) > 0:
-            initial_size = loop.size()[1]
+            initial_size = loop.size(1)
             loop = torch.nn.functional.pad(loop, (0, 0, 0, 64 - initial_size, 0, 0), mode='constant', value=0)
             loop = self.attention_list[loop_num](loop)
             loop = loop[:, :initial_size, :]
